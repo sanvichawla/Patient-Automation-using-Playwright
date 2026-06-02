@@ -4,19 +4,19 @@
 
 This project was created to automate the patient registration workflow in Office Ally CMS using Playwright.
 
-The objective was to reduce manual data entry by automating navigation to the Add New Patient page and preparing a workflow that can populate patient information from a CSV file.
+The objective of this project is to reduce manual data entry by automating navigation to the Add New Patient page and preparing a workflow that can populate patient information using CSV-based test data.
 
-The project was developed by recording user actions with Playwright Codegen, identifying selectors for required patient fields, and preparing a data-driven automation approach.
+The project was developed using Playwright Codegen to record browser actions, identify selectors, and understand the patient creation workflow.
 
 ---
 
 ## Project Goals
 
 - Automate patient creation workflow
-- Reduce manual data entry
+- Reduce manual effort
 - Learn Playwright automation
 - Understand selector identification
-- Implement CSV-based data handling
+- Work with CSV-based data
 - Explore real-world web automation
 
 ---
@@ -33,55 +33,66 @@ The project was developed by recording user actions with Playwright Codegen, ide
 
 ## Environment Setup
 
-### Step 1: Install Node.js
+### Install Node.js
 
 Verify installation:
 
-bash node -v npm -v 
+```bash
+node -v
+npm -v
+```
 
----
+### Create Project Folder
 
-### Step 2: Create Project
+```bash
+mkdir Office-Ally-Patient-Automation
+cd Office-Ally-Patient-Automation
+```
 
-bash mkdir Office-Ally-Patient-Automation cd Office-Ally-Patient-Automation 
+### Initialize Node Project
 
----
+```bash
+npm init -y
+```
 
-### Step 3: Initialize Node Project
+### Install Playwright
 
-bash npm init -y 
+```bash
+npm install -D @playwright/test
+```
 
-This generates:
+### Install Playwright Browsers
 
-text package.json 
+```bash
+npx playwright install
+```
 
----
+If required:
 
-### Step 4: Install Playwright
-
-bash npm install -D @playwright/test 
-
-Install browsers:
-
-bash npx playwright install 
-
-In some environments the following command was used:
-
-bash npx.cmd playwright install 
+```bash
+npx.cmd playwright install
+```
 
 ---
 
 ## Creating the First Test
 
-A basic Playwright test was created to verify that the installation was successful.
+A simple Playwright test was created to verify installation.
 
-Example:
+```javascript
+const { test } = require('@playwright/test');
 
-javascript const { test } = require('@playwright/test');  test('Google Test', async ({ page }) => {   await page.goto('https://google.com'); }); 
+test('Google Test', async ({ page }) => {
+  await page.goto('https://google.com');
+  await page.waitForTimeout(5000);
+});
+```
 
-Run:
+Run the test:
 
-bash npx.cmd playwright test --headed 
+```bash
+npx.cmd playwright test --headed
+```
 
 ---
 
@@ -89,33 +100,28 @@ bash npx.cmd playwright test --headed
 
 Playwright Codegen was used to record browser actions automatically.
 
-Command:
+```bash
+npx.cmd playwright codegen
+```
 
-bash npx.cmd playwright codegen 
-
-This opened:
-
-- Browser window
-- Playwright Inspector
-
-Actions performed:
+### Actions Performed
 
 1. Open Office Ally CMS
 2. Login
 3. Navigate to Manage Patients
 4. Open Add New Patient
 
-Playwright automatically generated locator code.
+Example Recorded Code:
 
-Example:
+```javascript
+await page.getByText('Manage Patients').click();
 
-javascript await page.getByText('Manage Patients').click();  await page.getByText('Add New Patient').click(); 
+await page.getByText('Add New Patient', { exact: true }).click();
+```
 
 ---
 
-## Selector Identification
-
-The following selectors were identified from the Add Patient form:
+## Fields Identified
 
 ### Patient Information
 
@@ -142,72 +148,75 @@ The following selectors were identified from the Add Patient form:
 - Insurance ID
 - Insurance Details
 
-These selectors were recorded using Playwright Inspector.
+Selectors were identified using Playwright Inspector.
 
 ---
 
-## CSV Data Preparation
+## Sample CSV Data
 
-A CSV file was created to store patient information.
+```csv
+PatientName,PatientAccountNumber,PatientAddress,PatientCity,PatientState,PatientZip,PatientHomePhone,Email,Sex
 
-Example:
-
-csv PatientName,PatientAccountNumber,PatientAddress,PatientCity,PatientState,PatientZip,PatientHomePhone,Email,Sex  "Smith, John",10001,"123 Main St",Dallas,PA,75001,2145551234,john@test.com,M 
-
-Purpose:
-
-- Store patient data externally
-- Enable data-driven testing
-- Support future bulk patient creation
+"Smith, John",10001,"123 Main St",Dallas,PA,75001,2145551234,john@test.com,M
+```
 
 ---
 
 ## Automation Workflow
 
-The planned automation flow:
-
 1. Open Office Ally CMS
-2. Login
+2. Login to the application
 3. Navigate to Manage Patients
-4. Click Add New Patient
+4. Open Add New Patient
 5. Read patient data from CSV
-6. Populate patient fields
+6. Fill patient details
 7. Save patient record
-8. Process next patient record
+8. Repeat process for additional patients
 
 ---
 
-## Commands Used During Development
+## Commands Used
 
 ### Verify Node Installation
 
-bash node -v npm -v 
+```bash
+node -v
+npm -v
+```
 
 ### Initialize Project
 
-bash npm init -y 
+```bash
+npm init -y
+```
 
 ### Install Playwright
 
-bash npm install -D @playwright/test 
+```bash
+npm install -D @playwright/test
+```
 
 ### Install Browsers
 
-bash npx.cmd playwright install 
+```bash
+npx.cmd playwright install
+```
 
-### Open Code Generator
+### Open Playwright Code Generator
 
-bash npx.cmd playwright codegen 
+```bash
+npx.cmd playwright codegen
+```
 
-### Run Tests
+### Run Automation
 
-bash npx.cmd playwright test --headed 
+```bash
+npx.cmd playwright test --headed
+```
 
 ---
 
 ## Learning Outcomes
-
-During this project, the following concepts were learned:
 
 - Playwright Automation
 - Browser Automation
@@ -215,7 +224,6 @@ During this project, the following concepts were learned:
 - Selector Identification
 - CSV Data Handling
 - Data-Driven Testing
-- Test Automation Fundamentals
 - Web Application Automation
 
 ---
@@ -224,9 +232,8 @@ During this project, the following concepts were learned:
 
 - Complete CSV integration
 - Bulk patient creation
+- Screenshot reporting
 - Error handling
-- Execution reports
-- Screenshot capture
 - Validation checks
 - End-to-end patient onboarding automation
 
@@ -234,6 +241,6 @@ During this project, the following concepts were learned:
 
 ## Author
 
-Sanvi Chawla
+**Sanvi Chawla**
 
 B.Tech Computer Science Engineering (Cyber Security)
