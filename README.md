@@ -75,18 +75,7 @@ npx.cmd playwright install
 
 ---
 
-## Creating the First Test
 
-A simple Playwright test was created to verify installation.
-
-```javascript
-const { test } = require('@playwright/test');
-
-test('Google Test', async ({ page }) => {
-  await page.goto('https://google.com');
-  await page.waitForTimeout(5000);
-});
-```
 
 Run the test:
 
